@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +21,27 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call(RoleSeeder::class);
+
+        $userAdmin = User::factory()->create([
+            'email' => 'admin@mailinator.com'
+        ]);
+        $userAdmin->assignRole(Role::where('id', User::ADMIN)->first());
+
+        $userKonselor = User::factory()->create([
+            'email' => 'konselor@mailinator.com'
+        ]);
+        $userKonselor->assignRole(Role::where('id', User::KONSELOR)->first());
+
+        $userGuru = User::factory()->create([
+            'email' => 'guru@mailinator.com'
+        ]);
+        $userGuru->assignRole(Role::where('id', User::GURU)->first());
+
+        $userSiswa = User::factory()->create([
+            'email' => 'siswa@mailinator.com'
+        ]);
+        $userSiswa->assignRole(Role::where('id', User::SISWA)->first());
     }
 }

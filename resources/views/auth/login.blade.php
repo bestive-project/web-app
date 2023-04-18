@@ -5,57 +5,64 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Dompet : Payment Admin Template</title>
+    <title>BESTIVE</title>
 
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/b-logo.png') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 
 <body class="vh-100">
-    <div class="authincation h-100">
+    <div class="authincation h-100 bg-white">
         <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <div class="auth-form">
-                                    <div class="text-center mb-3">
-                                        <a href="index.html"><img src="images/logo-full.png" alt=""></a>
+            <div class="row h-100 align-items-center">
+                <div class="authincation-content shadow-lg">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="auth-form row justify-content-center">
+                                <img src="{{ asset('images/b-logo.png') }}" width="300" height="300">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row h-100 align-items-center justify-content-center">
+                                <form class="auth-form" action="{{ route('web.login.process') }}" method="post"
+                                    id="formLogin">
+                                    @if (session('message'))
+                                        <div class="alert alert-danger solid alert-dismissible fade show mb-4">
+                                            {!! session('message') !!}
+                                        </div>
+                                    @endif
+                                    @csrf
+                                    <div class="mb-4 row">
+                                        <label class="col-sm-3 col-form-label fw-bold text-dark">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control input-rounded shadow"
+                                                name="email" value="{{ old('email') }}">
+                                            @error('email')
+                                                <label id="email-error" class="error"
+                                                    for="email">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <h4 class="text-center mb-4">Sign in your account</h4>
-                                    <form action="index.html">
-                                        <div class="mb-3">
-                                            <label class="mb-1"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" value="hello@example.com">
+                                    <div class="mb-4 row">
+                                        <label class="col-sm-3 col-form-label fw-bold text-dark">Password</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control input-rounded shadow"
+                                                name="password">
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
-                                        </div>
-                                        <div class="row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="mb-3">
-                                                <div class="form-check custom-checkbox ms-1">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        id="basic_checkbox_1">
-                                                    <label class="form-check-label" for="basic_checkbox_1">Remember my
-                                                        preference</label>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <a href="page-forgot-password.html">Forgot Password?</a>
-                                            </div>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
-                                        </div>
-                                    </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="page-register.html">Sign
-                                                up</a></p>
                                     </div>
-                                </div>
+                                    <div class="mb-3 text-center">
+                                        <button class="btn btn-dark btn-sm h-25 w-25 shadow"
+                                            style="background: #020202">Login</button>
+                                    </div>
+                                    <div class="mb-3 text-center">
+                                        <a href="">Lupa Password?</a>
+                                    </div>
+                                    <div class="mb-3 text-center">
+                                        Belum Punya Akun? <a href=""
+                                            class="text-dark fw-bold text-decoration-underline">Daftar</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -63,7 +70,48 @@
             </div>
         </div>
     </div>
-
+    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script>
+        (function($, W, D) {
+            var JQUERY4U = {};
+            JQUERY4U.UTIL = {
+                setupFormValidation: function() {
+                    $("#formLogin").validate({
+                        ignore: "",
+                        rules: {
+                            email: {
+                                required: true,
+                                email: true
+                            },
+                            password: {
+                                required: true,
+                                minlength: 8,
+                                maxlength: 255,
+                            }
+                        },
+                        messages: {
+                            email: {
+                                required: "email harap di isi!",
+                                email: "harap masukan email valid!"
+                            },
+                            password: {
+                                required: "password harap di isi!",
+                                minlength: "password minimal 8!",
+                                maxlength: "password maksimal 255!",
+                            }
+                        },
+                        submitHandler: function(form) {
+                            form.submit();
+                        }
+                    });
+                }
+            }
+            $(D).ready(function($) {
+                JQUERY4U.UTIL.setupFormValidation();
+            });
+        })(jQuery, window, document);
+    </script>
 </body>
 
 </html>
