@@ -15,4 +15,4 @@ Route::prefix('register')->middleware('guest')->group(function () {
     Route::post('/', [RegisterController::class, 'process'])->name('web.register.process');
 });
 
-Route::get('logout', LogoutController::class)->name('web.logout');
+Route::post('logout', LogoutController::class)->name('web.logout');

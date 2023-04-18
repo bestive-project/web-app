@@ -12146,15 +12146,15 @@ label {
 }
 
 .hamburger .line:nth-child(1) {
-    width: 26px;
+    width: 15px;
 }
 
 .hamburger .line:nth-child(2) {
-    width: 26px;
+    width: 20.5px;
 }
 
 .hamburger .line:nth-child(3) {
-    width: 15px;
+    width: 26px;
 }
 
 .hamburger:hover {
