@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -41,6 +42,13 @@ class DatabaseSeeder extends Seeder
 
         $userSiswa = User::factory()->create([
             'email' => 'siswa@mailinator.com'
+        ]);
+        $userSiswa->student()->create([
+            "birth_place" => "Indramayu",
+            "date_birth" => Carbon::now(),
+            "class" => "IPA 1",
+            "school" => "SMA Andalas 1",
+            "phone" => "1289182989",
         ]);
         $userSiswa->assignRole(Role::where('id', User::SISWA)->first());
     }

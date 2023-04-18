@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('login')->middleware('guest')->group(function () {
@@ -9,4 +10,9 @@ Route::prefix('login')->middleware('guest')->group(function () {
     Route::post('/', [LoginController::class, 'process'])->name('web.login.process');
 });
 
-Route::get('logout', LogoutController::class)->name('web.login.logout');
+Route::prefix('register')->middleware('guest')->group(function () {
+    Route::get('/', [RegisterController::class, 'index'])->name('web.register.index');
+    Route::post('/', [RegisterController::class, 'process'])->name('web.register.process');
+});
+
+Route::get('logout', LogoutController::class)->name('web.logout');

@@ -9,6 +9,7 @@
 
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/b-logo.png') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -19,7 +20,7 @@
                 <div class="authincation-content shadow-lg">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="auth-form row justify-content-center">
+                            <div class="auth-form d-flex h-100 justify-content-center align-items-center">
                                 <img src="{{ asset('images/b-logo.png') }}" width="300" height="300">
                             </div>
                         </div>
@@ -49,6 +50,10 @@
                                         <div class="col-sm-9">
                                             <input type="password" class="form-control input-rounded shadow"
                                                 name="password">
+                                            @error('password')
+                                                <label id="password-error" class="error"
+                                                    for="password">{{ $message }}</label>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 text-center">
@@ -59,7 +64,7 @@
                                         <a href="">Lupa Password?</a>
                                     </div>
                                     <div class="mb-3 text-center">
-                                        Belum Punya Akun? <a href=""
+                                        Belum Punya Akun? <a href="{{ route('web.register.index') }}"
                                             class="text-dark fw-bold text-decoration-underline">Daftar</a>
                                     </div>
                                 </form>
@@ -72,6 +77,10 @@
     </div>
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    @if (session('successMessage'))
+        {!! session('successMessage') !!}
+    @endif
     <script>
         (function($, W, D) {
             var JQUERY4U = {};
