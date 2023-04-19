@@ -8,6 +8,20 @@
                     <span class="nav-text">Beranda</span>
                 </a>
             </li>
+            @role('Admin')
+                <li>
+                    <a href="javascript:void()" class="has-arrow ai-icon" aria-expanded="false">
+                        <i><img src="{{ asset('icons/user-shield.svg') }}"></i>
+                        <span class="nav-text">Pengguna</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('web.admin.index') }}">Admin</a></li>
+                        <li><a href="menu-1">Konselor</a></li>
+                        <li><a href="menu-1">Guru</a></li>
+                        <li><a href="menu-1">Siswa</a></li>
+                    </ul>
+                </li>
+            @endrole
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i><img src="{{ asset('icons/book.svg') }}"></i>
                     <span class="nav-text">Pembelajaran</span>
