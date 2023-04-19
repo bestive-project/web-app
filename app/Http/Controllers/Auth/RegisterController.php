@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
@@ -28,6 +29,10 @@ class RegisterController extends Controller
         DB::beginTransaction();
 
         $role = Role::findOrFail($this->user::SISWA);
+
+        $request->merge([
+            "password" => Hash::make($request->password),
+        ]);
 
         try {
             $user = $this->user->create($request->all());
