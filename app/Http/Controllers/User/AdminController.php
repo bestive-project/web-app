@@ -23,11 +23,24 @@ class AdminController extends Controller
 
     public function index()
     {
+        return view("user.admin.index");
+    }
+
+    public function table(Request $request)
+    {
+        $users = $this->user->query();
+
+        if ($request->search) {
+            $users->where("name", "like", "%$request->search%");
+        }
+
+        $users = $users->role("Admin")->paginate($request->per_page);
+
         $data = [
-            "users" => $this->user->role("Admin")->get()
+            "users" => json_encode($users)
         ];
 
-        return view("user.admin.index", $data);
+        return view('user.admin.table', $data);
     }
 
     public function store(CreateAdminRequest $request)

@@ -18,7 +18,7 @@
                         <li><a href="{{ route('web.admin.index') }}">Admin</a></li>
                         <li><a href="menu-1">Konselor</a></li>
                         <li><a href="menu-1">Guru</a></li>
-                        <li><a href="menu-1">Siswa</a></li>
+                        <li><a href="{{ route('web.student.index') }}">Siswa</a></li>
                     </ul>
                 </li>
             @endrole

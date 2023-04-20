@@ -25,40 +25,7 @@
                     <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
                         data-bs-target="#addUserModal" id="addUserBtn">Tambah Pengguna</button>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-responsive-md">
-                            <thead>
-                                <tr>
-                                    <th style="width:80px;"><strong>#</strong></th>
-                                    <th><strong>Nama</strong></th>
-                                    <th><strong>Email</strong></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td><strong>{{ $loop->iteration }}</strong></td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" class="btn btn-warning shadow btn-xs sharp me-1"
-                                                    data-bs-toggle="modal" data-bs-target="#editUserModal"><i
-                                                        class="fas fa-pencil-alt"
-                                                        data-url="{{ route('web.admin.show', $user->uuid) }}"
-                                                        id="editUserBtn"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
-                                                    data-url="{{ route('web.admin.destroy', $user->uuid) }}"><i
-                                                        class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card-body" id="dataTable">
                 </div>
             </div>
         </div>
@@ -127,6 +94,37 @@
 
 @push('js')
     <script>
+        let params = {
+            per_page: 10,
+            page: 1,
+            search: ""
+        }
+
+        $(function() {
+            getUsers();
+
+            $("body").on("keyup", "#searching", function() {
+                params.search = $(this).val()
+                getUsers()
+            })
+        })
+
+        function getUsers() {
+            $.ajax({
+                url: '{{ route('web.admin.table') }}',
+                type: "get",
+                data: params,
+                success: function(response) {
+                    $("#dataTable").html(response)
+                }
+            })
+        }
+
+        function pageChange(e) {
+            params.page = e
+            getUsers()
+        }
+
         $(document).ready(function() {
             $("body").on("click", "#editUserBtn", function() {
                 $("#formEditUser").attr("action", $(this).data("url"))

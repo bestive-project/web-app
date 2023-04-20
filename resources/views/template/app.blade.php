@@ -15,6 +15,18 @@
 
     @stack('css')
 
+    <style>
+        .pointer-block {
+            cursor: no-drop
+        }
+
+        @media (min-width: 768px) {
+            #filter {
+                margin-top: -30px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
