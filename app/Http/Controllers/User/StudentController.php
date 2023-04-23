@@ -22,17 +22,18 @@ class StudentController extends Controller
 
     public function table(Request $request)
     {
+        $data["search"] = "";
+
         $users = $this->user->query();
 
         if ($request->search) {
+            $data["search"] = $request->search;
             $users->where("name", "like", "%$request->search%");
         }
 
         $users = $users->role("Siswa")->with("student")->paginate($request->per_page);
 
-        $data = [
-            "users" => json_encode($users)
-        ];
+        $data["users"] = json_encode($users);
 
         return view('user.student.table', $data);
     }

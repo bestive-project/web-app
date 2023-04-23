@@ -105,7 +105,9 @@
 
             $("body").on("keyup", "#searching", function() {
                 params.search = $(this).val()
-                getUsers()
+                setTimeout(() => {
+                    getUsers()
+                }, 1000);
             })
         })
 

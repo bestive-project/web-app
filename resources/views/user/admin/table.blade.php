@@ -3,7 +3,7 @@
 @endphp
 <div class="d-md-flex justify-content-between align-items-center" id="filter">
     <div class="me-md-2 me-0"><input type="search" class="form-control" placeholder="pencarian" id="searching"
-            value="{{ request('search') }}"></div>
+            value="{{ $search }}"></div>
     <nav class="d-flex align-items-center justify-content-md-end justify-content-center">
         <p class="me-2 mt-2">{{ $paginator->from }} - {{ $paginator->to }}</p>
         <p class="me-2 mt-2">dari</p>
