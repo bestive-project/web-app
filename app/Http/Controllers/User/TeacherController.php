@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ConselourController extends Controller
+class TeacherController extends Controller
 {
     protected $user;
 
@@ -17,7 +17,7 @@ class ConselourController extends Controller
 
     public function index()
     {
-        return view("user.conselour.index");
+        return view("user.teacher.index");
     }
 
     public function table(Request $request)
@@ -31,11 +31,11 @@ class ConselourController extends Controller
             $users->where("name", "like", "%$request->search%");
         }
 
-        $users = $users->role("Konselor")->paginate($request->per_page);
+        $users = $users->role("Guru")->paginate($request->per_page);
 
         $data["users"] = json_encode($users);
 
-        return view('user.conselour.table', $data);
+        return view('user.teacher.table', $data);
     }
 
     public function create()
