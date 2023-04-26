@@ -21,6 +21,13 @@
                         <li><a href="{{ route('web.student.index') }}">Siswa</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ route('web.study-group.index') }}" class="ai-icon" aria-expanded="false">
+                        <i>
+                            <img src="{{ asset('icons/classroom.svg') }}">
+                        </i>
+                        <span class="nav-text">Kelompok Belajar</span>
+                    </a>
+                </li>
             @endrole
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i><img src="{{ asset('icons/book.svg') }}"></i>

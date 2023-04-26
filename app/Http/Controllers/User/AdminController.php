@@ -64,8 +64,6 @@ class AdminController extends Controller
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();
         }
-
-        return $request->all();
     }
 
     public function show(string $id)

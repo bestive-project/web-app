@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Http\Traits\Uuid;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Student extends Model
 {
@@ -12,6 +14,7 @@ class Student extends Model
 
     protected $fillable = [
         "user_id",
+        "study_group_id",
         "birth_place",
         "date_birth",
         "class",
@@ -19,5 +22,15 @@ class Student extends Model
         "phone"
     ];
 
-    protected $hidden = ["id", "user_id"];
+    protected $hidden = ["id", "user_id", "study_group_id"];
+
+    public function studyGroup(): BelongsTo
+    {
+        return $this->belongsTo(Student::class, "id", "study_group_id");
+    }
+
+    public function scopeStudyGroupNull(Builder $query)
+    {
+        $query->where("study_group_id", 0);
+    }
 }
