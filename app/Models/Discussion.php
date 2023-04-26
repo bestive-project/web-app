@@ -5,29 +5,25 @@ namespace App\Models;
 use App\Http\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class StudyGroup extends Model
+class Discussion extends Model
 {
     use HasFactory, Uuid;
 
     protected $fillable = [
-        "name",
+        "wa_link",
+        "discord_link",
         "uuid",
     ];
 
     protected $hidden = [
         'id',
+        'study_group_id'
     ];
 
-    public function students(): HasMany
+    public function studyGroup(): HasOne
     {
-        return $this->hasMany(Student::class, "study_group_id", "id");
-    }
-
-    public function discussion(): HasOne
-    {
-        return $this->hasOne(Discussion::class, "study_group_id", "id");
+        return $this->hasOne(StudyGroup::class, "id", "study_group_id");
     }
 }
