@@ -99,6 +99,14 @@ class CategoryController extends Controller
         }
 
         try {
+            if ($category->courses) {
+                foreach ($category->courses as $course) {
+                    $course->chapters()->delete();
+                }
+
+                $category->courses()->delete();
+            }
+
             $category->delete();
 
             DB::commit();

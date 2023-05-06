@@ -29,13 +29,15 @@
                     </a>
                 </li>
             @endrole
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+            <li>
+                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i><img src="{{ asset('icons/book.svg') }}"></i>
                     <span class="nav-text">Pembelajaran</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="menu-1">Menu 1</a></li>
-                    <li><a href="menu-1">Menu 2</a></li>
+                    <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
+                    <li><a href="{{ route('web.course.index') }}">Kumpulan Materi</a></li>
+                    <li><a href="menu-1">Ujian</a></li>
                 </ul>
             </li>
             <li><a href="menu-1" class="ai-icon" aria-expanded="false">
@@ -52,7 +54,7 @@
                     <span class="nav-text">Diskusi</span>
                 </a>
             </li>
-            <li style="right: 0; bottom: 0; left: 0; position: absolute">
+            <li>
                 <a href="menu-1">
                     <i><img src="{{ asset('icons/question.svg') }}"></i>
                     <span class="nav-text">Pusat Bantuan</span>

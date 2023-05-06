@@ -31,7 +31,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:80px;"><strong>#</strong></th>
-                                    <th><strong>Nama Kelompok</strong></th>
+                                    <th><strong>Mata Pelajaran</strong></th>
                                     <th><strong></strong></th>
                                 </tr>
                             </thead>
