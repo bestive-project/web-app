@@ -42,7 +42,7 @@ class ChapterController extends Controller
             });
         });
 
-        $chapters = $chapters->with(["user", "document"])->paginate($request->per_page);
+        $chapters = $chapters->with(["user", "document", "course"])->paginate($request->per_page);
 
         $data["chapters"] = json_encode($chapters);
         $data["courseId"] = $id;
@@ -94,6 +94,30 @@ class ChapterController extends Controller
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();
         }
+    }
+
+    public function showBySlug(string $courseSlug, string $chapterSlug)
+    {
+        $course = $this->course->where("course_slug", $courseSlug)->first();
+        if (!$course) {
+            abort(404);
+        }
+
+        $chapter = $this->chapter->where("chapter_slug", $chapterSlug)->first();
+        if (!$chapter) {
+            abort(404);
+        }
+
+        $previous = $course->chapters()->where('id', '<', $chapter->id)->first();
+        $next = $course->chapters()->where('id', '>', $chapter->id)->first();
+
+        $data = [
+            "chapter" => $chapter,
+            "previous" => $previous,
+            "next" => $next,
+        ];
+
+        return view('course.chapter.show', $data);
     }
 
     public function show(string $id, string $chapter)

@@ -1,8 +1,10 @@
 <div class="my-post-content pt-3">
-    <div class="d-flex justify-content-between">
-        <a href="{{ route('web.chapter.create', $course->uuid) }}" class="btn btn-secondary mb-3">Tambah BAB</a>
-        <a href="{{ route('web.course.index') }}" class="btn btn-warning mb-3 text-white">Kembali</a>
-    </div>
+    @hasanyrole(['Admin', 'Guru'])
+        <div class="d-flex justify-content-between">
+            <a href="{{ route('web.chapter.create', $course->uuid) }}" class="btn btn-secondary mb-3">Tambah BAB</a>
+            <a href="{{ route('web.course.index') }}" class="btn btn-warning mb-3 text-white">Kembali</a>
+        </div>
+    @endhasanyrole
     <div id="dataTable" class="mt-3"></div>
 </div>
 

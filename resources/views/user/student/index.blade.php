@@ -16,17 +16,35 @@
             </ul>
         </div>
     @endif
+
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Daftar Pengguna Siswa</h4>
-                </div>
-                <div class="card-body" id="dataTable">
+                <div class="card-body">
+                    <div class="profile-tab">
+                        <div class="custom-tab-1">
+                            <ul class="nav nav-tabs justify-content-around">
+                                <li class="nav-item"><a href="#students" data-bs-toggle="tab"
+                                        class="nav-link active show">Data Individu Siswa </a>
+                                </li>
+                                <li class="nav-item"><a href="#groups" data-bs-toggle="tab" class="nav-link">Data
+                                        kelompok</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="students" class="tab-pane fade active show">
+                                    <div id="dataTable" class="mt-4"></div>
+                                </div>
+                                <div id="groups" class="tab-pane fade">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 
 @push('js')

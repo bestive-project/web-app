@@ -40,19 +40,23 @@
                         <div class="custom-tab-1">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item"><a href="#chapters" data-bs-toggle="tab"
-                                        class="nav-link active show">Bab Materi</a>
+                                        class="nav-link active show">BAB Materi</a>
                                 </li>
-                                <li class="nav-item"><a href="#course-edit" data-bs-toggle="tab" class="nav-link">Edit
-                                        Materi</a>
-                                </li>
+                                @hasanyrole(['Admin', 'Guru'])
+                                    <li class="nav-item"><a href="#course-edit" data-bs-toggle="tab" class="nav-link">Edit
+                                            Materi</a>
+                                    </li>
+                                @endhasanyrole
                             </ul>
                             <div class="tab-content">
                                 <div id="chapters" class="tab-pane fade active show">
                                     @include('course.detail.chapter')
                                 </div>
-                                <div id="course-edit" class="tab-pane fade">
-                                    @include('course.edit')
-                                </div>
+                                @hasanyrole(['Admin', 'Guru'])
+                                    <div id="course-edit" class="tab-pane fade">
+                                        @include('course.edit')
+                                    </div>
+                                @endhasanyrole
                             </div>
                         </div>
                     </div>
@@ -61,3 +65,11 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        function redirect(params) {
+            window.location.href = params;
+        }
+    </script>
+@endpush

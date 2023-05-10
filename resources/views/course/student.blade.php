@@ -1,19 +1,45 @@
 @push('css')
     <style>
-        .my-btn {
-            background: linear-gradient(90deg, #C5DDE4 10.89%, #EBF6FA 33.34%, #C5DDE4 78.87%, #EBF6FA 98.8%);
-            border-radius: 10px;
-            box-shadow: 1px 5px 10px #EBF6FA;
+        .card-img-top {
+            background-size: cover;
+            background-position: center;
+            min-height: 10rem;
             width: 100%;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
         }
     </style>
 @endpush
 
-<div class="card">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Kumpulan Materi Pembelajaran</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @foreach ($courses as $course)
+        <div class="col-lg-4 col-sm-6">
+            <div class="card">
+                <img src="{{ asset('images/profile/cover.jpg') }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $course->course_name }}</h5>
+                    <p class="card-text">
+                    <ul>
+                        <li>Jumlah BAB : {{ $course->chapters->count() }}</li>
+                    </ul>
+                    </p>
+                    <a href="{{ route('web.course.show.slug', $course->course_slug) }}"
+                        class="btn btn-primary">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
+{{-- <div class="card">
     <div class="card-header d-block">
         <h2 class="fw-bold">Ayo cek jadwal live class-mu!</h2>
     </div>
@@ -37,4 +63,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

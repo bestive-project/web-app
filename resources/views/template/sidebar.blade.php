@@ -29,6 +29,16 @@
                     </a>
                 </li>
             @endrole
+            @role('Siswa')
+                <li><a href="{{ route('web.course.index') }}" class="ai-icon" aria-expanded="false">
+                        <i>
+                            <img src="{{ asset('icons/classroom.svg') }}">
+                        </i>
+                        <span class="nav-text">Kumpulan Materi</span>
+                    </a>
+                </li>
+            @endrole
+            @hasanyrole("Admin")
             <li>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i><img src="{{ asset('icons/book.svg') }}"></i>
@@ -40,6 +50,7 @@
                     <li><a href="menu-1">Ujian</a></li>
                 </ul>
             </li>
+            @endhasanyrole
             <li><a href="menu-1" class="ai-icon" aria-expanded="false">
                     <i>
                         <img src="{{ asset('icons/message.svg') }}">

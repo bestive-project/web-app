@@ -36,8 +36,10 @@
             <tr>
                 <th style="width:80px;"><strong>#</strong></th>
                 <th><strong>BAB</strong></th>
-                <th><strong>Dokumen</strong></th>
-                <th></th>
+                @hasanyrole(['Admin', 'Guru'])
+                    <th><strong>Dokumen</strong></th>
+                    <th></th>
+                @endhasanyrole
             </tr>
         </thead>
         <tbody>
@@ -45,29 +47,32 @@
                 $index = 0;
             @endphp
             @foreach ($paginator->data as $key => $chapter)
-                <tr>
+                <tr
+                    @role('Siswa') style="cursor: pointer" onclick="redirect('{{ route('web.chapter.show.slug', ['chapterSlug' => $chapter->chapter_slug, 'courseSlug' => $chapter->course->course_slug]) }}')" @endrole>
                     <td><strong>{{ $index = $paginator->current_page + $key }}</strong></td>
                     <td>{{ $chapter->chapter_name }}</td>
-                    <td>
-                        @if ($chapter->document)
-                            <a href="{{ asset('storage/' . $chapter->document->document_path) }}" target="_blank"
-                                class="btn btn-rounded btn-primary"><span class="btn-icon-start text-primary"><i
-                                        class="fa fa-file-pdf"></i>
-                                </span>Dokumen</a>
-                        @else
-                            <p>Tidak ada dokumen</p>
-                        @endif
-                    </td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="{{ route('web.chapter.edit', ['id' => $courseId, 'chapter' => $chapter->uuid]) }}"
-                                class="btn btn-warning text-white shadow btn-xs sharp me-1"><i
-                                    class="fas fa-pencil-alt"></i></a>
-                            <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
-                                data-url="{{ route('web.chapter.destroy', ['id' => $courseId, 'chapter' => $chapter->uuid]) }}"><i
-                                    class="fa fa-trash"></i></a>
-                        </div>
-                    </td>
+                    @hasanyrole(['Admin', 'Guru'])
+                        <td>
+                            @if ($chapter->document)
+                                <a href="{{ asset('storage/' . $chapter->document->document_path) }}" target="_blank"
+                                    class="btn btn-rounded btn-primary"><span class="btn-icon-start text-primary"><i
+                                            class="fa fa-file-pdf"></i>
+                                    </span>Dokumen</a>
+                            @else
+                                <p>Tidak ada dokumen</p>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="{{ route('web.chapter.edit', ['id' => $courseId, 'chapter' => $chapter->uuid]) }}"
+                                    class="btn btn-warning text-white shadow btn-xs sharp me-1"><i
+                                        class="fas fa-pencil-alt"></i></a>
+                                <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
+                                    data-url="{{ route('web.chapter.destroy', ['id' => $courseId, 'chapter' => $chapter->uuid]) }}"><i
+                                        class="fa fa-trash"></i></a>
+                            </div>
+                        </td>
+                    @endhasanyrole
                 </tr>
             @endforeach
         </tbody>

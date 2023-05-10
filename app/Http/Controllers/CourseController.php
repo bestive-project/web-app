@@ -22,7 +22,11 @@ class CourseController extends Controller
 
     public function index()
     {
-        return view("course.index");
+        $data = [
+            "courses" => $this->course->all()
+        ];
+
+        return view("course.index", $data);
     }
 
     public function table(Request $request)
@@ -91,6 +95,16 @@ class CourseController extends Controller
         ];
 
         return view('course.show', $data);
+    }
+
+    public function showBySlug($slug)
+    {
+        $course = $this->course->where("course_slug", $slug)->first();
+        if (!$course) {
+            abort(404);
+        }
+
+        return $this->show($course->uuid);
     }
 
     public function update(CourseRequestStore $request, string $id)
