@@ -38,18 +38,19 @@
                     </a>
                 </li>
             @endrole
-            @hasanyrole("Admin")
-            <li>
-                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i><img src="{{ asset('icons/book.svg') }}"></i>
-                    <span class="nav-text">Pembelajaran</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
-                    <li><a href="{{ route('web.course.index') }}">Kumpulan Materi</a></li>
-                    <li><a href="menu-1">Ujian</a></li>
-                </ul>
-            </li>
+            @hasanyrole('Admin')
+                <li>
+                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i><img src="{{ asset('icons/book.svg') }}"></i>
+                        <span class="nav-text">Pembelajaran</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
+                        <li><a href="{{ route('web.course.index') }}">Kumpulan Materi</a></li>
+                        <li><a href="{{ route('web.live-class.index') }}">Live Class</a></li>
+                        <li><a href="menu-1">Ujian</a></li>
+                    </ul>
+                </li>
             @endhasanyrole
             <li><a href="menu-1" class="ai-icon" aria-expanded="false">
                     <i>

@@ -26,7 +26,7 @@ class Student extends Model
 
     public function studyGroup(): BelongsTo
     {
-        return $this->belongsTo(Student::class, "id", "study_group_id");
+        return $this->belongsTo(StudyGroup::class, "study_group_id", "id");
     }
 
     public function scopeStudyGroupNull(Builder $query)

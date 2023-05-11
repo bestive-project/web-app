@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -29,5 +30,10 @@ class StudyGroup extends Model
     public function discussion(): HasOne
     {
         return $this->hasOne(Discussion::class, "study_group_id", "id");
+    }
+
+    public function liveClass(): BelongsTo
+    {
+        return $this->belongsTo(LiveClass::class, "id", "study_group_id");
     }
 }

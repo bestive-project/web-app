@@ -118,7 +118,7 @@ class StudyGroupController extends Controller
             }
 
             $studyGroup->discussion()->delete();
-
+            $studyGroup->liveClass()->delete();
             $studyGroup->delete();
 
             DB::commit();

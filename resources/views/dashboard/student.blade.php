@@ -9,25 +9,27 @@
 
         <div class="d-flex flex-column flex-sm-row justify-content-around my-5">
             <div class="text-center">
-                <div class="card mb-5 shadow-lg">
-                    <div class="card-body d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('images/onlinemeeting.png') }}"
-                            height="150" />
+                <a href="{{ route('web.schedule.live-class') }}">
+                    <div class="card mb-5 shadow-lg">
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/onlinemeeting.png') }}" height="150" />
+                        </div>
                     </div>
-                </div>
 
-                <h3 class="fw-bold mt-2">Belajar</h3>
+                    <h3 class="fw-bold mt-2">Belajar</h3>
+                </a>
             </div>
 
             <div class="text-center">
-                <div class="card mb-5 shadow-lg">
-                    <div class="card-body d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('images/counseling.png') }}"
-                        height="150" />
+                <a href="">
+                    <div class="card mb-5 shadow-lg">
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/counseling.png') }}" height="150" />
+                        </div>
                     </div>
-                </div>
 
-                <h3 class="fw-bold mt-2">Konseling</h3>
+                    <h3 class="fw-bold mt-2">Konseling</h3>
+                </a>
             </div>
         </div>
     </div>
