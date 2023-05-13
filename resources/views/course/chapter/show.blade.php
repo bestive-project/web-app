@@ -82,6 +82,20 @@
                         {!! $chapter->chapter_description !!}
                     </div>
                 </div>
+
+                @if ($chapter->quiz)
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Kuis</h4>
+                            <p>Kuis ini bertujuan untuk menguji pengetahuan Anda tentang materi
+                                {{ $chapter->chapter_name }}.</p>
+                            <p>Terdapat beberapa pertanyaan yang harus dikerjakan dalam kuis ini.</p>
+                            <p class="fw-bold">Selamat Mengerjakan!</p>
+                            <a href="{{ route('web.quiz.show', $chapter->quiz->uuid) }}" target="_blank"
+                                rel="noopener noreferrer" class="btn btn-primary">Kerjakan</a>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 

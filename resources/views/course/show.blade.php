@@ -1,6 +1,23 @@
 @extends('template.app')
 
 @section('content')
+
+    @if (session('message'))
+        <div class="alert alert-danger solid">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger solid">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-lg-12">
             <div class="profile card card-body px-3 pt-3 pb-0">
@@ -66,10 +83,77 @@
     </div>
 @endsection
 
+@push('modal')
+    <div class="modal fade" id="addQuizModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Simpan Kuis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form action="{{ route('web.quiz.store') }}" method="post" id="formAddQuiz">
+                    <input type="hidden" name="chapter_id">
+                    <input type="hidden" name="course_id">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label>Link Kuis</label>
+                            <input type="url" name="link_quiz" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush
+
 @push('js')
     <script>
         function redirect(params) {
             window.location.href = params;
         }
+
+        $("body").on("click", ".btn-quiz", function() {
+            $("input[name='link_quiz']").val(" ")
+            $("input[name='chapter_id']").val($(this).data("chapterid"))
+            $("input[name='course_id']").val($(this).data("courseid"))
+
+            if ($(this).data("quiz")) {
+                $("input[name='link_quiz']").val($(this).data("quiz"))
+            }
+        })
+    </script>
+    <script>
+        (function($, W, D) {
+            var JQUERY4U = {};
+            JQUERY4U.UTIL = {
+                setupFormValidation: function() {
+                    $("#formAddQuiz").validate({
+                        ignore: "",
+                        rules: {
+                            link_quiz: {
+                                required: true,
+                            },
+                        },
+                        messages: {
+                            link_quiz: {
+                                required: "link kuis harap di isi!",
+                            },
+                        },
+                        submitHandler: function(form) {
+                            form.submit();
+                        }
+                    });
+                }
+            }
+            $(D).ready(function($) {
+                JQUERY4U.UTIL.setupFormValidation();
+            });
+        })(jQuery, window, document);
     </script>
 @endpush

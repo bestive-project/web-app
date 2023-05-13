@@ -4,7 +4,7 @@ namespace App\Http\Requests\WEB;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class QuizRequestStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,16 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "category_name" => "required|unique:categories,category_name"
+            "chapter_id" => "required|exists:chapters,uuid",
+            "link_quiz" => "required"
         ];
     }
 
     public function attributes()
     {
         return [
-            "category_name" => "mata pelajaran"
+            "chapter_id" => "bab",
+            "link_quiz" => "link kuis",
         ];
     }
 }

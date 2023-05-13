@@ -42,7 +42,7 @@ class ChapterController extends Controller
             });
         });
 
-        $chapters = $chapters->with(["user", "document", "course"])->paginate($request->per_page);
+        $chapters = $chapters->with(["user", "document", "course", "quiz"])->paginate($request->per_page);
 
         $data["chapters"] = json_encode($chapters);
         $data["courseId"] = $id;

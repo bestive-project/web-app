@@ -6,6 +6,8 @@ use App\Http\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Chapter extends Model
@@ -31,6 +33,11 @@ class Chapter extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function quiz(): MorphOne
+    {
+        return $this->morphOne(Quiz::class, "quizzable");
     }
 
     public function course(): BelongsTo

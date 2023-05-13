@@ -30,6 +30,7 @@
                 </svg></button></p>
     </nav>
 </div>
+
 <div class="table-responsive">
     <table class="table table-hover table-bordered">
         <thead>
@@ -38,6 +39,7 @@
                 <th><strong>BAB</strong></th>
                 @hasanyrole(['Admin', 'Guru'])
                     <th><strong>Dokumen</strong></th>
+                    <th><strong>Upload Kuis</strong></th>
                     <th></th>
                 @endhasanyrole
             </tr>
@@ -61,6 +63,14 @@
                             @else
                                 <p>Tidak ada dokumen</p>
                             @endif
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-rounded btn-info btn-quiz" data-bs-toggle="modal"
+                                data-bs-target="#addQuizModal" data-courseid="{{ $chapter->course->uuid }}"
+                                data-chapterid="{{ $chapter->uuid }}"
+                                data-quiz="{{ $chapter->quiz ? $chapter->quiz->link_quiz : '' }}"><span
+                                    class="btn-icon-start text-info"><i class="fa fa-upload"></i>
+                                </span>Upload</a>
                         </td>
                         <td>
                             <div class="d-flex">
