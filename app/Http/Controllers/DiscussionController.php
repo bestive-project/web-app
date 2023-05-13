@@ -5,24 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WEB\DiscussionRequest;
 use App\Models\Discussion;
 use App\Models\StudyGroup;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DiscussionController extends Controller
 {
-    protected $discussion, $studyGroup;
+    protected $discussion, $studyGroup, $user;
 
-    public function __construct(Discussion $discussion, StudyGroup $studyGroup)
+    public function __construct(Discussion $discussion, StudyGroup $studyGroup, User $user)
     {
         $this->discussion = $discussion;
         $this->studyGroup = $studyGroup;
+        $this->user = $user;
     }
 
     public function index()
     {
+        $user = $this->user->findOrFail(Auth::user()->id);
+
         $data = [
             "discussions" => $this->discussion->all(),
             "studyGroups" => $this->studyGroup->all(),
+            "user" => $user
         ];
 
         return view('discussion.index', $data);
