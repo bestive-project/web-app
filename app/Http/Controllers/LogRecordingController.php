@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LiveClass;
+use App\Models\LiveCounseling;
 use App\Models\LogRecording;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,11 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class LogRecordingController extends Controller
 {
-    protected $liveClass, $logRecording;
+    protected $liveClass, $liveCounseling, $logRecording;
 
-    public function __construct(LiveClass $liveClass, LogRecording $logRecording)
+    public function __construct(LiveClass $liveClass, LiveCounseling $liveCounseling, LogRecording $logRecording)
     {
         $this->liveClass = $liveClass;
+        $this->liveCounseling = $liveCounseling;
         $this->logRecording = $logRecording;
     }
 
@@ -36,21 +38,44 @@ class LogRecordingController extends Controller
             "link_recording" => 'required'
         ]);
 
-        $liveClass = $this->liveClass->where('uuid', $request->live_class_id)->first();
-        if (!$liveClass) {
-            abort(404);
+        if ($request->isCounseling) {
+            $liveCounseling = $this->liveCounseling->where('uuid', $request->live_class_id)->first();
+            if (!$liveCounseling) {
+                abort(404);
+            }
+
+            $request->merge([
+                "log_type" => $this->logRecording::TYPE_LIVECOUNSELING
+            ]);
+
+            $route = route("web.live-counseling.show", $liveCounseling->uuid);
+
+            $id = $liveCounseling->id;
+        } else {
+            $liveClass = $this->liveClass->where('uuid', $request->live_class_id)->first();
+            if (!$liveClass) {
+                abort(404);
+            }
+
+            $request->merge([
+                "log_type" => $this->logRecording::TYPE_LIVECLASS
+            ]);
+
+            $route = route("web.live-class.show", $liveClass->uuid);
+
+            $id = $liveClass->id;
         }
 
         try {
             $request->merge([
-                "live_class_id" => $liveClass->id,
-                "link_title" => Carbon::now()->isoFormat("dddd, d MMMM YYYY")
+                "live_id" => $id,
+                "link_title" => Carbon::now()->isoFormat("dddd, D MMMM YYYY")
             ]);
 
             $this->logRecording->create($request->all());
 
             DB::commit();
-            return redirect(route("web.live-class.show", $liveClass->uuid))->with("successMessage", '<script>swal("Selamat!", "recording berhasil ditambahkan!", "success")</script>');
+            return redirect($route)->with("successMessage", '<script>swal("Selamat!", "recording berhasil ditambahkan!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();
@@ -81,13 +106,17 @@ class LogRecordingController extends Controller
             abort(404);
         }
 
-        $liveClassId = $logRecording->liveClass->uuid;
+        if ($logRecording->log_type == LogRecording::TYPE_LIVECOUNSELING) {
+            $route = route("web.live-counseling.show", $logRecording->liveCounseling->uuid);
+        } else {
+            $route = route("web.live-class.show", $logRecording->liveClass->uuid);
+        }
 
         try {
             $logRecording->delete();
 
             DB::commit();
-            return redirect(route('web.live-class.show', $liveClassId))->with("successMessage", '<script>swal("Selamat!", "record berhasil dihapus!", "success")</script>');
+            return redirect($route)->with("successMessage", '<script>swal("Selamat!", "record berhasil dihapus!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();

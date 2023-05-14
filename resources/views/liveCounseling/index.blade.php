@@ -21,9 +21,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Daftar Jadwal Live Class</h4>
+                    <h4 class="card-title">Daftar Jadwal Konseling</h4>
                     <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                        data-bs-target="#addLiveClassModal">Tambah Jadwal</button>
+                        data-bs-target="#addliveCounselingModal">Tambah Jadwal</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -38,26 +38,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($liveClasses as $liveClass)
+                                @foreach ($liveCounselings as $liveCounseling)
                                     <tr>
                                         <td><strong>{{ $loop->iteration }}</strong></td>
-                                        <td>{{ $liveClass->studyGroup->name }}</td>
-                                        <td>{{ $liveClass->day }}</td>
-                                        <td>{{ $liveClass->hour }}</td>
-                                        <td><a href="{{ $liveClass->link_meet }}" target="_blank" rel="noopener noreferrer"
-                                                class="btn btn-info">Join Meet</a>
-                                            <a href="{{ route('web.live-class.show', $liveClass->uuid) }}"
+                                        <td>{{ $liveCounseling->studyGroup->name }}</td>
+                                        <td>{{ $liveCounseling->day }}</td>
+                                        <td>{{ $liveCounseling->hour }}</td>
+                                        <td><a href="{{ $liveCounseling->link_meet }}" target="_blank"
+                                                rel="noopener noreferrer" class="btn btn-info">Join Meet</a>
+                                            <a href="{{ route('web.live-counseling.show', $liveCounseling->uuid) }}"
                                                 class="btn btn-primary">Upload Recording</a>
                                         </td>
                                         <td>
                                             <div class="d-flex">
                                                 <a href="#" class="btn btn-warning shadow btn-xs sharp me-1"
-                                                    data-bs-toggle="modal" data-bs-target="#editLiveClassModal"><i
+                                                    data-bs-toggle="modal" data-bs-target="#editliveCounselingModal"><i
                                                         class="fas fa-pencil-alt"
-                                                        data-url="{{ route('web.live-class.show', $liveClass->uuid) }}"
-                                                        id="editLiveClassBtn"></i></a>
+                                                        data-url="{{ route('web.live-counseling.show', $liveCounseling->uuid) }}"
+                                                        id="editLiveCounselingModal"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
-                                                    data-url="{{ route('web.live-class.destroy', $liveClass->uuid) }}"><i
+                                                    data-url="{{ route('web.live-counseling.destroy', $liveCounseling->uuid) }}"><i
                                                         class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
@@ -73,7 +73,7 @@
 @endsection
 
 @push('modal')
-    <div class="modal fade" id="addLiveClassModal">
+    <div class="modal fade" id="addliveCounselingModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -81,7 +81,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
-                <form action="{{ route('web.live-class.store') }}" method="post" id="formAddLiveClass">
+                <form action="{{ route('web.live-counseling.store') }}" method="post" id="formAddliveCounseling">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -94,7 +94,7 @@
                             </select>
                         </div>
                         <div class="row">
-                            <label>Jadwal Live Class</label>
+                            <label>Jadwal Konseling</label>
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <select name="day" class="form-select input-rounded shadow-sm">
@@ -130,7 +130,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="editLiveClassModal">
+    <div class="modal fade" id="editliveCounselingModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,7 +138,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
-                <form action="{{ route('web.discussion.store') }}" method="post" id="formEditLiveClass">
+                <form action="{{ route('web.discussion.store') }}" method="post" id="formEditliveCounseling">
                     @csrf
                     @method('put')
                     <div class="modal-body">
@@ -156,14 +156,15 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $("body").on("click", "#editLiveClassBtn", function() {
-                $("#formEditLiveClass").attr("action", $(this).data("url"))
+            $("body").on("click", "#editLiveCounselingModal", function() {
+                console.log("OK");
+                $("#formEditliveCounseling").attr("action", $(this).data("url"))
 
                 $.ajax({
                     url: $(this).data("url") + "/edit",
                     type: "get",
                     success: function(response) {
-                        $("#formEditLiveClass .modal-body").html(response)
+                        $("#formEditliveCounseling .modal-body").html(response)
                     },
                 })
             })
@@ -174,7 +175,7 @@
             var JQUERY4U = {};
             JQUERY4U.UTIL = {
                 setupFormValidation: function() {
-                    $("#formAddLiveClass").validate({
+                    $("#formAddliveCounseling").validate({
                         ignore: "",
                         rules: {
                             study_group_id: {

@@ -48,11 +48,10 @@
                         <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
                         <li><a href="{{ route('web.course.index') }}">Kumpulan Materi</a></li>
                         <li><a href="{{ route('web.live-class.index') }}">Live Class</a></li>
-                        <li><a href="menu-1">Ujian</a></li>
                     </ul>
                 </li>
             @endhasanyrole
-            <li><a href="menu-1" class="ai-icon" aria-expanded="false">
+            <li><a href="{{ route('web.live-counseling.index') }}" class="ai-icon" aria-expanded="false">
                     <i>
                         <img src="{{ asset('icons/message.svg') }}">
                     </i>

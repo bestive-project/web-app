@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class LiveClass extends Model
+class LiveCounseling extends Model
 {
     use HasFactory, Uuid;
 
@@ -33,6 +33,6 @@ class LiveClass extends Model
 
     public function logRecordings(): HasMany
     {
-        return $this->hasMany(LogRecording::class, 'live_id', 'id')->where("log_type", LogRecording::TYPE_LIVECLASS);
+        return $this->hasMany(LogRecording::class, 'live_id', 'id')->where("log_type", LogRecording::TYPE_LIVECOUNSELING);
     }
 }
