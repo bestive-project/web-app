@@ -3,9 +3,10 @@
 @section('content')
     @role('Siswa')
         @include('course.student')
-        @elserole('Admin')
-        @include('course.admin')
     @endrole
+    @hasanyrole(['Admin', 'Guru'])
+        @include('course.admin')
+    @endhasanyrole
 @endsection
 
 @push('js')

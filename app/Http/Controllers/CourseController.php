@@ -40,6 +40,10 @@ class CourseController extends Controller
             $courses->where("course_name", "like", "%$request->search%");
         }
 
+        if (Auth::user()->roles('Guru')) {
+            $courses->where('user_id', Auth::user()->id);
+        }
+
         $courses = $courses->with(["user", "category"])->paginate($request->per_page);
 
         $data["courses"] = json_encode($courses);

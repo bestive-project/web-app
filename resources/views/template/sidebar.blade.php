@@ -45,13 +45,15 @@
                         <span class="nav-text">Pembelajaran</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
+                        @role('Admin')
+                            <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
+                        @endrole
                         <li><a href="{{ route('web.course.index') }}">Kumpulan Materi</a></li>
                         <li><a href="{{ route('web.live-class.index') }}">Live Class</a></li>
                     </ul>
                 </li>
             @endhasanyrole
-            @hasallroles(['Admin', 'Konselor'])
+            @hasanyrole(['Admin', 'Konselor'])
                 <li><a href="{{ route('web.live-counseling.index') }}" class="ai-icon" aria-expanded="false">
                         <i>
                             <img src="{{ asset('icons/message.svg') }}">
