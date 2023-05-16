@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Daftar Pengguna Konselor</h4>
                     <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                        data-bs-target="#addUserModal" id="addUserBtn">Tambah Pengguna</button>
+                        data-bs-target="#addUserModal" id="addUserBtn">Tambah Konselor</button>
                 </div>
                 <div class="card-body" id="dataTable">
                 </div>
@@ -37,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Pengguna</h5>
+                    <h5 class="modal-title">Tambah Konselor</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -48,6 +48,21 @@
                             <label>Nama Lengkap</label>
                             <input type="text" name="name" class="form-control input-rounded shadow-sm"
                                 value="{{ old('name') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Usia</label>
+                            <input type="text" name="age" class="form-control input-rounded shadow-sm"
+                                value="{{ old('age') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Pendidikan</label>
+                            <input type="text" name="study" class="form-control input-rounded shadow-sm"
+                                value="{{ old('study') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Jurusan</label>
+                            <input type="text" name="major" class="form-control input-rounded shadow-sm"
+                                value="{{ old('major') }}">
                         </div>
                         <div class="mb-3">
                             <label>Email</label>
