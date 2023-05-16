@@ -6,7 +6,7 @@ use App\Http\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Counselor extends Model
+class Teacher extends Model
 {
     use HasFactory, Uuid;
 
@@ -15,6 +15,7 @@ class Counselor extends Model
         "age",
         "study",
         "major",
+        "interest",
         "uuid",
     ];
 

@@ -38,7 +38,7 @@
                     </a>
                 </li>
             @endrole
-            @hasanyrole('Admin')
+            @hasanyrole(['Admin', 'Guru'])
                 <li>
                     <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i><img src="{{ asset('icons/book.svg') }}"></i>
@@ -51,13 +51,15 @@
                     </ul>
                 </li>
             @endhasanyrole
-            <li><a href="{{ route('web.live-counseling.index') }}" class="ai-icon" aria-expanded="false">
-                    <i>
-                        <img src="{{ asset('icons/message.svg') }}">
-                    </i>
-                    <span class="nav-text">Konseling</span>
-                </a>
-            </li>
+            @hasallroles(['Admin', 'Konselor'])
+                <li><a href="{{ route('web.live-counseling.index') }}" class="ai-icon" aria-expanded="false">
+                        <i>
+                            <img src="{{ asset('icons/message.svg') }}">
+                        </i>
+                        <span class="nav-text">Konseling</span>
+                    </a>
+                </li>
+            @endhasanyrole
             <li><a href="{{ route('web.discussion.index') }}" class="ai-icon" aria-expanded="false">
                     <i>
                         <img src="{{ asset('icons/group.svg') }}">

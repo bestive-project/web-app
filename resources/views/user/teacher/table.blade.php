@@ -37,6 +37,8 @@
             <th style="width:80px;"><strong>#</strong></th>
             <th><strong>Nama</strong></th>
             <th><strong>Email</strong></th>
+            <th><strong>Pendidikan</strong></th>
+            <th><strong>Jurusan</strong></th>
             <th></th>
         </tr>
     </thead>
@@ -46,13 +48,15 @@
                 <td><strong>{{ $paginator->current_page + $key }}</strong></td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->teacher->study }}</td>
+                <td>{{ $user->teacher->major }}</td>
                 <td>
                     <div class="d-flex">
                         <a href="#" class="btn btn-warning shadow btn-xs sharp me-1" data-bs-toggle="modal"
                             data-bs-target="#editUserModal"><i class="fas fa-pencil-alt"
-                                data-url="{{ route('web.admin.show', $user->uuid) }}" id="editUserBtn"></i></a>
+                                data-url="{{ route('web.teacher.show', $user->uuid) }}" id="editUserBtn"></i></a>
                         <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
-                            data-url="{{ route('web.admin.destroy', $user->uuid) }}"><i class="fa fa-trash"></i></a>
+                            data-url="{{ route('web.teacher.destroy', $user->uuid) }}"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

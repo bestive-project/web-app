@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Daftar Pengguna Guru</h4>
                     <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                        data-bs-target="#addUserModal" id="addUserBtn">Tambah Pengguna</button>
+                        data-bs-target="#addUserModal" id="addUserBtn">Tambah Guru</button>
                 </div>
                 <div class="card-body" id="dataTable">
                 </div>
@@ -37,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Pengguna</h5>
+                    <h5 class="modal-title">Tambah Guru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -48,6 +48,26 @@
                             <label>Nama Lengkap</label>
                             <input type="text" name="name" class="form-control input-rounded shadow-sm"
                                 value="{{ old('name') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Usia</label>
+                            <input type="text" name="age" class="form-control input-rounded shadow-sm"
+                                value="{{ old('age') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Pendidikan</label>
+                            <input type="text" name="study" class="form-control input-rounded shadow-sm"
+                                value="{{ old('study') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Jurusan</label>
+                            <input type="text" name="major" class="form-control input-rounded shadow-sm"
+                                value="{{ old('major') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Minat</label>
+                            <input type="text" name="interest" class="form-control input-rounded shadow-sm"
+                                value="{{ old('interest') }}">
                         </div>
                         <div class="mb-3">
                             <label>Email</label>
@@ -72,7 +92,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Pengguna</h5>
+                    <h5 class="modal-title">Edit Guru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -151,6 +171,18 @@
                             name: {
                                 required: true,
                             },
+                            age: {
+                                required: true,
+                            },
+                            study: {
+                                required: true,
+                            },
+                            major: {
+                                required: true,
+                            },
+                            interest: {
+                                required: true,
+                            },
                             email: {
                                 required: true,
                                 email: true
@@ -162,8 +194,20 @@
                             }
                         },
                         messages: {
+                            age: {
+                                required: "usia harap di isi!",
+                            },
+                            study: {
+                                required: "pendidikan harap di isi!",
+                            },
+                            major: {
+                                required: "jurusan harap di isi!",
+                            },
                             name: {
                                 required: "nama lengkap harap di isi!",
+                            },
+                            interest: {
+                                required: "minat harap di isi!",
                             },
                             email: {
                                 required: "email harap di isi!",
@@ -192,7 +236,19 @@
                     $("#formEditUser").validate({
                         ignore: "",
                         rules: {
+                            age: {
+                                required: true,
+                            },
+                            study: {
+                                required: true,
+                            },
+                            major: {
+                                required: true,
+                            },
                             name: {
+                                required: true,
+                            },
+                            interest: {
                                 required: true,
                             },
                             email: {
@@ -201,8 +257,20 @@
                             },
                         },
                         messages: {
+                            age: {
+                                required: "usia harap di isi!",
+                            },
+                            study: {
+                                required: "pendidikan harap di isi!",
+                            },
+                            major: {
+                                required: "jurusan harap di isi!",
+                            },
                             name: {
                                 required: "nama lengkap harap di isi!",
+                            },
+                            interest: {
+                                required: "minat harap di isi!",
                             },
                             email: {
                                 required: "email harap di isi!",

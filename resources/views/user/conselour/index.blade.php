@@ -87,7 +87,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Pengguna</h5>
+                    <h5 class="modal-title">Edit Konselor</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -166,6 +166,15 @@
                             name: {
                                 required: true,
                             },
+                            age: {
+                                required: true,
+                            },
+                            study: {
+                                required: true,
+                            },
+                            major: {
+                                required: true,
+                            },
                             email: {
                                 required: true,
                                 email: true
@@ -177,6 +186,15 @@
                             }
                         },
                         messages: {
+                            age: {
+                                required: "usia harap di isi!",
+                            },
+                            study: {
+                                required: "pendidikan harap di isi!",
+                            },
+                            major: {
+                                required: "jurusan harap di isi!",
+                            },
                             name: {
                                 required: "nama lengkap harap di isi!",
                             },
@@ -207,6 +225,15 @@
                     $("#formEditUser").validate({
                         ignore: "",
                         rules: {
+                            age: {
+                                required: true,
+                            },
+                            study: {
+                                required: true,
+                            },
+                            major: {
+                                required: true,
+                            },
                             name: {
                                 required: true,
                             },
@@ -216,6 +243,15 @@
                             },
                         },
                         messages: {
+                            age: {
+                                required: "usia harap di isi!",
+                            },
+                            study: {
+                                required: "pendidikan harap di isi!",
+                            },
+                            major: {
+                                required: "jurusan harap di isi!",
+                            },
                             name: {
                                 required: "nama lengkap harap di isi!",
                             },
