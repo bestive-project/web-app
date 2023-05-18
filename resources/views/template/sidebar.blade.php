@@ -69,12 +69,14 @@
                     <span class="nav-text">Diskusi</span>
                 </a>
             </li>
-            <li>
-                <a href="menu-1">
-                    <i><img src="{{ asset('icons/question.svg') }}"></i>
-                    <span class="nav-text">Pusat Bantuan</span>
-                </a>
-            </li>
+            @hasanyrole(['Admin', 'Siswa'])
+                <li>
+                    <a href="{{ route('web.help-center.index') }}">
+                        <i><img src="{{ asset('icons/question.svg') }}"></i>
+                        <span class="nav-text">Pusat Bantuan</span>
+                    </a>
+                </li>
+            @endhasanyrole
         </ul>
     </div>
 </div>
