@@ -5,25 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WEB\LiveClass\LiveClassRequest;
 use App\Models\LiveClass;
 use App\Models\StudyGroup;
+use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LiveClassController extends Controller
 {
-    protected $liveClass, $studyGroup;
+    protected $liveClass, $studyGroup, $user;
 
-    public function __construct(LiveClass $liveClass, StudyGroup $studyGroup)
+    public function __construct(LiveClass $liveClass, StudyGroup $studyGroup, User $user)
     {
         $this->liveClass = $liveClass;
         $this->studyGroup = $studyGroup;
+        $this->user = $user;
     }
 
     public function index()
     {
         $data = [
             "liveClasses" => $this->liveClass->all(),
-            "studyGroups" => $this->studyGroup->all()
+            "studyGroups" => $this->studyGroup->all(),
+            "teachers" => $this->user->role("Guru")->get()
         ];
+
+        if (Auth::user()->hasRole('Guru')) {
+            $data["liveClasses"] = $this->liveClass->where("user_id", Auth::user()->id)->get();
+        }
 
         return view('liveClass.index', $data);
     }
@@ -42,9 +51,15 @@ class LiveClassController extends Controller
             abort(404);
         }
 
+        $user = $this->user->where('uuid', $request->user_id)->first();
+        if (!$user) {
+            abort(404);
+        }
+
         try {
             $request->merge([
-                "study_group_id" => $studyGroup->id
+                "study_group_id" => $studyGroup->id,
+                "user_id" => $user->id
             ]);
 
             $this->liveClass->create($request->all());
@@ -80,7 +95,8 @@ class LiveClassController extends Controller
 
         $data = [
             "liveClass" => $liveClass,
-            "studyGroups" => $this->studyGroup->all()
+            "studyGroups" => $this->studyGroup->all(),
+            "teachers" => $this->user->role("Guru")->get()
         ];
 
         return view('liveClass.edit', $data);
@@ -98,9 +114,15 @@ class LiveClassController extends Controller
             abort(404);
         }
 
+        $user = $this->user->where('uuid', $request->user_id)->first();
+        if (!$user) {
+            abort(404);
+        }
+
         try {
             $request->merge([
-                "study_group_id" => $studyGroup->id
+                "study_group_id" => $studyGroup->id,
+                "user_id" => $user->id
             ]);
 
             $liveClass->update($request->all());

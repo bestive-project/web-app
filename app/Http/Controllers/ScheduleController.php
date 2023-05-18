@@ -25,4 +25,13 @@ class ScheduleController extends Controller
 
         return view('schedule.liveClass', $data);
     }
+
+    public function liveCounseling()
+    {
+        $data = [
+            "user" => $this->user->findOrFail(Auth::user()->id)
+        ];
+
+        return view('schedule.liveCounseling', $data);
+    }
 }

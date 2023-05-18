@@ -30,7 +30,9 @@
                             <th><strong>Nama Kelompok</strong></th>
                             <th><strong>WA Link</strong></th>
                             <th><strong>Discord Link</strong></th>
-                            <th><strong></strong></th>
+                            @role('Admin')
+                                <th><strong></strong></th>
+                            @endrole
                         </tr>
                     </thead>
                     <tbody>
@@ -44,18 +46,20 @@
                                 <td><a href="{{ $discussion->discord_link }}" target="_blank" rel="noopener noreferrer"
                                         class="btn btn-secondary sharp btn-sm"><i class="fab fa-discord fa-lg"></i></a>
                                 </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-warning shadow btn-xs sharp me-1"
-                                            data-bs-toggle="modal" data-bs-target="#editDiscussionModal"><i
-                                                class="fas fa-pencil-alt"
-                                                data-url="{{ route('web.discussion.show', $discussion->uuid) }}"
-                                                id="editDiscussionBtn"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
-                                            data-url="{{ route('web.discussion.destroy', $discussion->uuid) }}"><i
-                                                class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
+                                @role('Admin')
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="#" class="btn btn-warning shadow btn-xs sharp me-1"
+                                                data-bs-toggle="modal" data-bs-target="#editDiscussionModal"><i
+                                                    class="fas fa-pencil-alt"
+                                                    data-url="{{ route('web.discussion.show', $discussion->uuid) }}"
+                                                    id="editDiscussionBtn"></i></a>
+                                            <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
+                                                data-url="{{ route('web.discussion.destroy', $discussion->uuid) }}"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                @endrole
                             </tr>
                         @endforeach
                     </tbody>

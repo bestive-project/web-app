@@ -14,6 +14,7 @@ class LiveClass extends Model
 
     protected $fillable = [
         "study_group_id",
+        "user_id",
         "link_meet",
         "date_meet",
         "day",
@@ -23,12 +24,18 @@ class LiveClass extends Model
 
     protected $hidden = [
         "study_group_id",
+        "user_id",
         "id",
     ];
 
     public function studyGroup(): HasOne
     {
         return $this->hasOne(StudyGroup::class, 'id', 'study_group_id');
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function logRecordings(): HasMany

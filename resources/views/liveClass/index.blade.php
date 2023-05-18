@@ -22,45 +22,54 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Daftar Jadwal Live Class</h4>
-                    <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                        data-bs-target="#addLiveClassModal">Tambah Jadwal</button>
+                    @role('Admin')
+                        <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
+                            data-bs-target="#addLiveClassModal">Tambah Jadwal</button>
+                    @endrole
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width:80px;"><strong>#</strong></th>
+                                    @role('Admin')
+                                        <th><strong>Penanggung Jawab</strong></th>
+                                    @endrole
                                     <th><strong>Kelompok Belajar</strong></th>
                                     <th><strong>Hari</strong></th>
-                                    <th><strong>Jam</strong></th>
                                     <th><strong></strong></th>
+                                    @role('Admin')
+                                        <th><strong></strong></th>
+                                    @endrole
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($liveClasses as $liveClass)
                                     <tr>
-                                        <td><strong>{{ $loop->iteration }}</strong></td>
+                                        @role('Admin')
+                                            <td>{{ $liveClass->user->name }}</td>
+                                        @endrole
                                         <td>{{ $liveClass->studyGroup->name }}</td>
-                                        <td>{{ $liveClass->day }}</td>
-                                        <td>{{ $liveClass->hour }}</td>
+                                        <td>{{ $liveClass->day }} (Pukul {{ $liveClass->hour }} WIB)</td>
                                         <td><a href="{{ $liveClass->link_meet }}" target="_blank" rel="noopener noreferrer"
                                                 class="btn btn-info">Join Meet</a>
                                             <a href="{{ route('web.live-class.show', $liveClass->uuid) }}"
                                                 class="btn btn-primary">Upload Recording</a>
                                         </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" class="btn btn-warning shadow btn-xs sharp me-1"
-                                                    data-bs-toggle="modal" data-bs-target="#editLiveClassModal"><i
-                                                        class="fas fa-pencil-alt"
-                                                        data-url="{{ route('web.live-class.show', $liveClass->uuid) }}"
-                                                        id="editLiveClassBtn"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
-                                                    data-url="{{ route('web.live-class.destroy', $liveClass->uuid) }}"><i
-                                                        class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
+                                        @role('Admin')
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="#" class="btn btn-warning shadow btn-xs sharp me-1"
+                                                        data-bs-toggle="modal" data-bs-target="#editLiveClassModal"><i
+                                                            class="fas fa-pencil-alt"
+                                                            data-url="{{ route('web.live-class.show', $liveClass->uuid) }}"
+                                                            id="editLiveClassBtn"></i></a>
+                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp btn-delete"
+                                                        data-url="{{ route('web.live-class.destroy', $liveClass->uuid) }}"><i
+                                                            class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        @endrole
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -84,6 +93,19 @@
                 <form action="{{ route('web.live-class.store') }}" method="post" id="formAddLiveClass">
                     @csrf
                     <div class="modal-body">
+                        @role('Admin')
+                            <div class="mb-3">
+                                <label>Penanggung Jawab</label>
+                                <select name="user_id" class="form-select input-rounded shadow-sm">
+                                    <option selected disabled></option>
+                                    @foreach ($teachers as $teacher)
+                                        <option value="{{ $teacher->uuid }}">{{ $teacher->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @elserole("Guru")
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->uuid }}">
+                        @endrole
                         <div class="mb-3">
                             <label>Kelompok Belajar</label>
                             <select name="study_group_id" class="form-select input-rounded shadow-sm">

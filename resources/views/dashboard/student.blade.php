@@ -21,7 +21,7 @@
             </div>
 
             <div class="text-center">
-                <a href="">
+                <a href="{{ route('web.schedule.live-counseling') }}">
                     <div class="card mb-5 shadow-lg">
                         <div class="card-body d-flex justify-content-center align-items-center">
                             <img src="{{ asset('images/counseling.png') }}" height="150" />

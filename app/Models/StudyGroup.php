@@ -36,4 +36,9 @@ class StudyGroup extends Model
     {
         return $this->belongsTo(LiveClass::class, "id", "study_group_id");
     }
+
+    public function liveCounseling(): BelongsTo
+    {
+        return $this->belongsTo(LiveCounseling::class, "id", "study_group_id");
+    }
 }

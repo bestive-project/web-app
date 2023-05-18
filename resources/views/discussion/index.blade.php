@@ -1,11 +1,11 @@
 @extends('template.app')
 
 @section('content')
-    @hasanyrole(['Siswa', 'Guru', 'Konselor'])
-        @include('discussion.student')
+    @hasanyrole(['Admin', 'Guru', 'Konselor'])
+        @include('discussion.admin')
     @endhasanyrole
 
-    @role('Admin')
-        @include('discussion.admin')
+    @role('Siswa')
+        @include('discussion.student')
     @endrole
 @endsection

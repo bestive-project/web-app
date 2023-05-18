@@ -40,7 +40,7 @@ class CourseController extends Controller
             $courses->where("course_name", "like", "%$request->search%");
         }
 
-        if (Auth::user()->roles('Guru')) {
+        if (Auth::user()->hasRole('Guru')) {
             $courses->where('user_id', Auth::user()->id);
         }
 
