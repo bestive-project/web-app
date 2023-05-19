@@ -5,24 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WEB\LiveCounseling\LiveCounselingRequest;
 use App\Models\LiveCounseling;
 use App\Models\StudyGroup;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class LiveCounselingController extends Controller
 {
-    protected $liveCounseling, $studyGroup;
+    protected $liveCounseling, $studyGroup, $user;
 
-    public function __construct(LiveCounseling $liveCounseling, StudyGroup $studyGroup)
+    public function __construct(LiveCounseling $liveCounseling, StudyGroup $studyGroup, User $user)
     {
         $this->liveCounseling = $liveCounseling;
         $this->studyGroup = $studyGroup;
+        $this->user = $user;
     }
 
     public function index()
     {
         $data = [
             "liveCounselings" => $this->liveCounseling->all(),
-            "studyGroups" => $this->studyGroup->all()
+            "studyGroups" => $this->studyGroup->all(),
+            "counselors" => $this->user->role("Konselor")->get()
         ];
 
         return view("liveCounseling.index", $data);
@@ -42,9 +45,15 @@ class LiveCounselingController extends Controller
             abort(404);
         }
 
+        $user = $this->user->where('uuid', $request->user_id)->first();
+        if (!$user) {
+            abort(404);
+        }
+
         try {
             $request->merge([
-                "study_group_id" => $studyGroup->id
+                "study_group_id" => $studyGroup->id,
+                "user_id" => $user->id
             ]);
 
             $this->liveCounseling->create($request->all());
@@ -80,7 +89,8 @@ class LiveCounselingController extends Controller
 
         $data = [
             "liveCounseling" => $liveCounseling,
-            "studyGroups" => $this->studyGroup->all()
+            "studyGroups" => $this->studyGroup->all(),
+            "counselors" => $this->user->role("Konselor")->get()
         ];
 
         return view('liveCounseling.edit', $data);
@@ -98,9 +108,15 @@ class LiveCounselingController extends Controller
             abort(404);
         }
 
+        $user = $this->user->where('uuid', $request->user_id)->first();
+        if (!$user) {
+            abort(404);
+        }
+
         try {
             $request->merge([
-                "study_group_id" => $studyGroup->id
+                "study_group_id" => $studyGroup->id,
+                "user_id" => $user->id
             ]);
 
             $liveCounseling->update($request->all());

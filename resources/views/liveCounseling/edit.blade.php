@@ -1,4 +1,18 @@
 <div class="mb-3">
+    @role('Admin')
+        <div class="mb-3">
+            <label>Penanggung Jawab</label>
+            <select name="user_id" class="form-select input-rounded shadow-sm">
+                <option selected disabled></option>
+                @foreach ($counselors as $counselor)
+                    <option value="{{ $counselor->uuid }}"
+                        {{ $liveCounseling->user_id == $counselor->id ? 'selected' : '' }}>{{ $counselor->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        @elserole("Konselor")
+        <input type="hidden" name="user_id" value="{{ auth()->user()->uuid }}">
+    @endrole
     <label>Kelompok Belajar</label>
     <select name="study_group_id" class="form-select input-rounded shadow-sm">
         <option selected disabled></option>
