@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 includeRouteFiles(__DIR__ . "/web/");
+
+Route::middleware(['auth'])->prefix('user')->group(function () {
+    Route::get('profile', [ProfileController::class, 'index'])->name('web.profile.index');
+});
 
 Route::get('/', DashboardController::class)->name('web.dashboard.index')->middleware('auth');
 

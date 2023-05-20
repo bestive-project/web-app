@@ -23,10 +23,6 @@ class RegisterRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "birth_place" => "required",
-            "date_birth" => "required",
-            "class" => "required",
-            "school" => "required",
             "phone" => "required|numeric",
             "email" => "required|email|unique:users",
             "password" => "required|min:8|max:255"

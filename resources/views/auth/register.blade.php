@@ -45,7 +45,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="mb-4 row">
+                                    {{-- <div class="mb-4 row">
                                         <label class="col-sm-3 col-form-label fw-bold text-dark">Tempat Lahir</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control input-rounded shadow"
@@ -88,7 +88,7 @@
                                                     for="school">{{ $message }}</label>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="mb-4 row">
                                         <label class="col-sm-3 col-form-label fw-bold text-dark">No Telepon</label>
                                         <div class="col-sm-9">

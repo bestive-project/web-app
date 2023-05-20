@@ -19,8 +19,10 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Daftar Link Diskusi</h4>
-                <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                    data-bs-target="#addDiscussionModal" id="addDiscussionBtn">Tambah Link Diskusi</button>
+                @role('Admin')
+                    <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
+                        data-bs-target="#addDiscussionModal" id="addDiscussionBtn">Tambah Link Diskusi</button>
+                @endrole
             </div>
             <div class="card-body">
                 <table class="table table-responsive-md">
