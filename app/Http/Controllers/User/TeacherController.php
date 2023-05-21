@@ -18,6 +18,7 @@ class TeacherController extends Controller
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->middleware("role:Admin", ["except" => ["update"]]);
     }
 
     public function index()
@@ -111,6 +112,11 @@ class TeacherController extends Controller
             ]);
 
             DB::commit();
+
+            if ($user->role('Guru')) {
+                return back()->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil diperbaharui!", "success")</script>');
+            }
+
             return redirect(route("web.teacher.index"))->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil diperbaharui!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();

@@ -19,6 +19,7 @@ includeRouteFiles(__DIR__ . "/web/");
 
 Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('web.profile.index');
+    Route::put('profile/update', [ProfileController::class, 'update'])->name('web.profile.update');
 });
 
 Route::get('/', DashboardController::class)->name('web.dashboard.index')->middleware('auth');

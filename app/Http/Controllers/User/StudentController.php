@@ -115,6 +115,11 @@ class StudentController extends Controller
             ]);
 
             DB::commit();
+
+            if ($user->role('Siswa')) {
+                return back()->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil diperbaharui!", "success")</script>');
+            }
+
             return redirect(route("web.student.show", $id))->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil diperbaharui!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();

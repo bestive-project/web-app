@@ -19,6 +19,7 @@ class ConselourController extends Controller
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->middleware("role:Admin", ["except" => ["update"]]);
     }
 
     public function index()
@@ -113,6 +114,9 @@ class ConselourController extends Controller
             ]);
 
             DB::commit();
+            if ($user->role('Konselor')) {
+                return back()->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil diperbaharui!", "success")</script>');
+            }
             return redirect(route("web.conselour.index"))->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil diperbaharui!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();

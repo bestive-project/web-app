@@ -127,9 +127,6 @@
                                             style="background: #020202">Daftar</button>
                                     </div>
                                     <div class="mb-3 text-center">
-                                        <a href="">Lupa Password?</a>
-                                    </div>
-                                    <div class="mb-3 text-center">
                                         Sudah Punya Akun? <a href="{{ route('web.login.index') }}"
                                             class="text-dark fw-bold text-decoration-underline">Login</a>
                                     </div>

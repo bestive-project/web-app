@@ -17,16 +17,18 @@
                                 class="fas fa-user scale5"></i></a>
                         <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end"
                             style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-15px, 79px); min-width: 12.5rem; padding: 15px 0">
-                            <a href="{{ route('web.profile.index') }}" class="dropdown-item ai-icon">
-                                <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
-                                    width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                <span class="ms-2">Profile Saya </span>
-                            </a>
+                            @unlessrole('Admin')
+                                <a href="{{ route('web.profile.index') }}" class="dropdown-item ai-icon">
+                                    <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
+                                        width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span class="ms-2">Profile Saya </span>
+                                </a>
+                            @endunlessrole
                             <form action="{{ route('web.logout') }}" method="post">
                                 @csrf
                                 <button id="btnLogout" class="dropdown-item ai-icon">

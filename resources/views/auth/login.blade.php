@@ -62,9 +62,6 @@
                                             style="background: #020202">Login</button>
                                     </div>
                                     <div class="mb-3 text-center">
-                                        <a href="">Lupa Password?</a>
-                                    </div>
-                                    <div class="mb-3 text-center">
                                         Belum Punya Akun? <a href="{{ route('web.register.index') }}"
                                             class="text-dark fw-bold text-decoration-underline">Daftar</a>
                                     </div>

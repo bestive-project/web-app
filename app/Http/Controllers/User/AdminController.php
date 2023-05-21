@@ -19,6 +19,7 @@ class AdminController extends Controller
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->middleware("role:Admin");
     }
 
     public function index()
@@ -59,6 +60,7 @@ class AdminController extends Controller
             $user->syncRoles($role);
 
             DB::commit();
+
             return redirect(route("web.admin.index"))->with("successMessage", '<script>swal("Selamat!", "pengguna berhasil ditambahkan!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();
