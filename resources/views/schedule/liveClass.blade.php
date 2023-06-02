@@ -29,10 +29,12 @@
                 <div class="my-btn">
                     <span class="text-dark fw-bold">Live Class</span>
                 </div>
-                @if ($user->student->studyGroup && $user->student->studyGroup->liveClass)
+                @if ($user->student->studyGroup)
                     <div class="card mt-4 shadow">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            @if (Carbon::now()->isoFormat('dddd') == $user->student->studyGroup->liveClass->day)
+                            @if (
+                                $user->student->studyGroup->liveClass &&
+                                    Carbon::now()->isoFormat('dddd') == $user->student->studyGroup->liveClass->day)
                                 <a href="{{ $user->student->studyGroup->liveClass->link_meet }}" target="_blank"
                                     class="btn btn-info">Mulai Live Class</a>
                             @else
