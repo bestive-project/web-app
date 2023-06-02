@@ -46,7 +46,7 @@
                     </a>
                     <ul aria-expanded="false">
                         @role('Admin')
-                            <li><a href="{{ route('web.category.index') }}">Mata Pelajaran</a></li>
+                            <li><a href="{{ route('web.category.index') }}">Kategori Pelajaran</a></li>
                         @endrole
                         <li><a href="{{ route('web.course.index') }}">Kumpulan Materi</a></li>
                         <li><a href="{{ route('web.live-class.index') }}">Live Class</a></li>

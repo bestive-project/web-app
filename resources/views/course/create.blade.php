@@ -33,7 +33,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="mb-3">
-                            <label>Mata Pelajaran</label>
+                            <label>Kategori Pelajaran</label>
                             <select name="category_id" class="form-select">
                                 <option selected disabled></option>
                                 @foreach ($categories as $category)
@@ -82,7 +82,7 @@
                         },
                         messages: {
                             category_id: {
-                                required: "mata pelajaran harap di isi!",
+                                required: "kategori pelajaran harap di isi!",
                             },
                             course_name: {
                                 required: "judul materi harap di isi!",

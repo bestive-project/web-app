@@ -44,7 +44,7 @@ class CategoryController extends Controller
             $this->category->create($request->all());
 
             DB::commit();
-            return redirect(route('web.category.index'))->with("successMessage", '<script>swal("Selamat!", "mata pelajaran berhasil ditambahkan!", "success")</script>');
+            return redirect(route('web.category.index'))->with("successMessage", '<script>swal("Selamat!", "kategori pelajaran berhasil ditambahkan!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();
@@ -83,7 +83,7 @@ class CategoryController extends Controller
             $category->update($request->all());
 
             DB::commit();
-            return redirect(route('web.category.index'))->with("successMessage", '<script>swal("Selamat!", "mata pelajaran berhasil diperbaharui!", "success")</script>');
+            return redirect(route('web.category.index'))->with("successMessage", '<script>swal("Selamat!", "kategori pelajaran berhasil diperbaharui!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();
@@ -111,7 +111,7 @@ class CategoryController extends Controller
             $category->delete();
 
             DB::commit();
-            return redirect(route('web.category.index'))->with("successMessage", '<script>swal("Selamat!", "mata pelajaran berhasil dihapus!", "success")</script>');
+            return redirect(route('web.category.index'))->with("successMessage", '<script>swal("Selamat!", "kategori pelajaran berhasil dihapus!", "success")</script>');
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with("message", $th->getMessage())->withInput();

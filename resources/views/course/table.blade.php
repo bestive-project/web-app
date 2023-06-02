@@ -36,7 +36,7 @@
             <tr>
                 <th style="width:80px;"><strong>#</strong></th>
                 <th><strong>Judul Materi</strong></th>
-                <th><strong>Mata Pelajaran</strong></th>
+                <th><strong>Kategori Pelajaran</strong></th>
                 <th><strong>Pemateri</strong></th>
                 <th></th>
             </tr>

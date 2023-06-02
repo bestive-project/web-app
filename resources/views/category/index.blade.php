@@ -21,9 +21,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Daftar Mata Pelajaran</h4>
+                    <h4 class="card-title">Daftar Kategori Pelajaran</h4>
                     <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                        data-bs-target="#addCategoryModal" id="addDiscussionBtn">Tambah Mata Pelajaran</button>
+                        data-bs-target="#addCategoryModal" id="addDiscussionBtn">Tambah Kategori Pelajaran</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -31,7 +31,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:80px;"><strong>#</strong></th>
-                                    <th><strong>Mata Pelajaran</strong></th>
+                                    <th><strong>Kategori Pelajaran</strong></th>
                                     <th><strong></strong></th>
                                 </tr>
                             </thead>
@@ -68,7 +68,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Mata Pelajaran</h5>
+                    <h5 class="modal-title">Tambah Kategori Pelajaran</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -76,7 +76,7 @@
                     @csrf
                     <div class="modal-body">
                         <div>
-                            <label>Nama Mata Pelajaran</label>
+                            <label>Nama Kategori Pelajaran</label>
                             <input type="text" class="form-control input-rounded shadow-sm" name="category_name"
                                 value="{{ old('category_name') }}">
                         </div>
@@ -93,7 +93,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Mata Pelajaran</h5>
+                    <h5 class="modal-title">Edit Kategori Pelajaran</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -102,7 +102,7 @@
                     @method('put')
                     <div class="modal-body">
                         <div>
-                            <label>Nama Mata Pelajaran</label>
+                            <label>Nama Kategori Pelajaran</label>
                             <input type="text" class="form-control input-rounded shadow-sm" id="category_name"
                                 name="category_name">
                         </div>
@@ -148,7 +148,7 @@
                         },
                         messages: {
                             category_name: {
-                                required: "mata pelajaran harap di isi!",
+                                required: "kategori pelajaran harap di isi!",
                             },
                         },
                         submitHandler: function(form) {

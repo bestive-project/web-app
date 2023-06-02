@@ -19,7 +19,7 @@
         @csrf
         @method('put')
         <div class="mb-3">
-            <label>Mata Pelajaran</label>
+            <label>Kategori Pelajaran</label>
             <select name="category_id" class="form-select">
                 <option selected disabled></option>
                 @foreach ($categories as $category)

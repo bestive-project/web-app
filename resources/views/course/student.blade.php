@@ -13,7 +13,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Kumpulan Materi Pembelajaran</h4>
+                <h4 class="card-title">Kumpulan Materi Pelajaran</h4>
             </div>
         </div>
     </div>

@@ -37,7 +37,9 @@
                 <img src="{{ asset('/') }}images/b-text-logo.svg" class="brand-title">
             </a>
             <div class="nav-control">
-                <i class="fas fa-arrow-left"></i>
+                <div class="hamburger" style="transform: rotate(180deg)">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
             </div>
         </div>
 
@@ -80,6 +82,11 @@
                     </div>
                     <div class="card-body">
                         {!! $chapter->chapter_description !!}
+
+                        @if ($chapter->document)
+                            <object data="{{ asset('storage/' . $chapter->document->document_path) }}"
+                                type="application/pdf" width="100%" height="600px"></object>
+                        @endif
                     </div>
                 </div>
 
